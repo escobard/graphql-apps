@@ -41,3 +41,8 @@
 		}
 	}
 	```
+
+### GraphiQL
+
+- made as an IDE by the GraphQL team to visualize graphQL queries and data fetching.
+- https://workspace.ibm.com/graphql
