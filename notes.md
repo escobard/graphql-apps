@@ -23,3 +23,21 @@
 				- if we only wanted to fetch the user's name for example, why would we need the rest of the user's data?
 
 ### GraphQL
+
+- GraphQL allows us to create complex HTTP requests to fetch SPECIFIC ammounts of data from our database within a single HTTP request.
+- GraphQL queries look like this:
+	```
+	query{
+		//looks for user with the id of 23
+		user(id:"23"){
+			// looks for the all the friends for that user
+			friends{
+				// fetches the companies for all the friends of the user
+				company{
+					// fetches the name of that company
+					name
+				}
+			}
+		}
+	}
+	```
