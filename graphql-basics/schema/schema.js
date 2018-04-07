@@ -53,6 +53,8 @@ const RootQuery = new GraphQLObjectType({
 
 		// essentially this does the following:
 		// creates the property users, which contains the data of the selected type
+
+		// this is the property the query will accept
 		user:{
 
 			// creates the grabs all properties from the UserType schema (or ObjectType) defined above
@@ -62,6 +64,7 @@ const RootQuery = new GraphQLObjectType({
 			args: {
 
 				// tells it to look for the id argument, and sets the type to string
+				// this sets the argument of this query
 				id: {type: GraphQLString}
 			},
 			
@@ -79,6 +82,9 @@ const RootQuery = new GraphQLObjectType({
 
 					// this finds a user with a given user id from the users[array] we just created
 					// this is using the lodash library
+
+					// graphQL will accept any kind of raw data type (sql, json, etc)
+					// and convert it here into GQL for us to use within the GQL runtime
 					return _.find(users, {id: args.id })
 			}
 		}

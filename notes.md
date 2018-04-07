@@ -42,6 +42,38 @@
 	}
 	```
 - Think of a query as an entry point into the data application
+- Query expanded:
+
+	```
+	{
+		schema(argument: property) {
+			schema,
+			properties,
+		}
+	}
+
+	Or in our case
+
+	{
+		user(id: "23"){
+			id,
+			firstName,
+			age
+		}
+	}
+
+	which would return the following data, since our schema does contain a user with that ID:
+	"data":{
+		"user": {
+			"id": "23",
+			"firstName": "Bill",
+			"age" : 20
+		}
+	}
+	```
+- queries LOOK like javascript but are NOT javascript
+- We can also remove any DEFINED properties of the user schema within the QUERY
+	- this will only return the specified properties of the SCHEMA within the QUERY RESULT
 
 ### GraphiQL
 
