@@ -85,3 +85,25 @@
 	- console: where we see the results of the query
 	- documentation: where we see the current root / query types - SUPER USEFUL
 		- this area allows to view the properties of the queries including queries, and object types
+
+### JSON server
+
+- creates a database on runtime to use asynchronously
+```
+{ // sets the route of the data
+	"users":
+	// sets the properties of the data
+	[
+	{
+		"id": "23",
+		"firstName": "Bill",
+		"age": 20
+	}, 
+	{
+		"id": "47",
+		"firstName": "Samantha",
+		"age": 21
+	}
+]
+}
+```
