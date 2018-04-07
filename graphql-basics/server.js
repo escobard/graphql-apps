@@ -1,5 +1,6 @@
 const express = require('express'),
-expressGraphQL = require('express-graphql')
+expressGraphQL = require('express-graphql'),
+schema = require('./schema/schema')
 
 const app = express()
 
@@ -10,6 +11,9 @@ app.use('/graphql',
 	// this tells express to handle this particular request with the graphQL library
 	expressGraphQL({
 
+		// sets the schema of the middleware for this route
+		// abbreviated from schema : schema with ES6
+		schema,
 		// this tells the application to display the graphiql IDE when this route is reached
 		graphiql: true
 	}))
