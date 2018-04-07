@@ -4,7 +4,13 @@
 const graphql = require("graphql"),
 	axios = require("axios"),
 	// deleted lodash since we are using async requests_ = require('lodash')
-	{ GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql;
+	{
+		GraphQLObjectType,
+		GraphQLString,
+		GraphQLInt,
+		GraphQLSchema,
+		GraphQLList
+	} = graphql;
 
 // for this project we will use static data
 // we'll be using lodash as a helper library to go through the data to save time
@@ -28,11 +34,26 @@ const users = [
 // GQL here: https://www.udemy.com/graphql-with-react-course/learn/v4/t/lecture/6523072
 const CompanyType = new GraphQLObjectType({
 	name: "Company",
-	fields: {
+
+	// we return this as a function to avoid the order of operations error
+	// caused by the undefined UserType during initial runtime
+	fields: () => ({
 		id: { type: GraphQLString },
 		name: { type: GraphQLString },
-		description: { type: GraphQLString }
-	}
+		description: { type: GraphQLString },
+
+		// this allows us to query for users with the CompanyType as the parentValue, much like was done int he users type below
+		users: {
+			// this type expects a LIST of OBJECTS to be returned
+			// this throws an error since the UserType has not been defined yet
+			type: new GraphQLList(UserType),
+			resolve(parentValue, args) {
+				return axios
+					.get(`http://localhost:3000/companies/${parentValue.id}/users`)
+					.then(resolve => resolve.data);
+			}
+		}
+	})
 });
 
 // creates an object type - a schema that graphql uses
@@ -42,7 +63,7 @@ const UserType = new GraphQLObjectType({
 
 	// this sets the properties that    the object type has - the keys of fields aka fields.key
 	// is the property we want our User schema to have
-	fields: {
+	fields: () => ({
 		// very similar to mongoose, we have to declare the type of each of the schema fields
 		// for graphQL to recognize
 		id: { type: GraphQLString },
@@ -63,7 +84,7 @@ const UserType = new GraphQLObjectType({
 					.then(response => response.data);
 			}
 		}
-	}
+	})
 });
 
 // this defines the query for our user data, telling graphQL how to look for the data within our database
