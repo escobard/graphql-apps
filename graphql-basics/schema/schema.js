@@ -2,18 +2,20 @@
 // for GraphQL to know EXACTLY what your data looks like
 
 const graphql = require('graphql'),
-_ = require('lodash')
-
-// this grabs the properties that we need to define our schema from the graphql library
-const {
+axios = require('axios'),
+// deleted lodash since we are using async requests_ = require('lodash')
+{
 	GraphQLObjectType,
 	GraphQLString,
 	GraphQLInt,
 	GraphQLSchema
 } = graphql;
 
+
 // for this project we will use static data
 // we'll be using lodash as a helper library to go through the data to save time
+// deleted to use json server data instead
+/*
 const users = [
 	{
 		id: "23",
@@ -26,7 +28,7 @@ const users = [
 		age: '21'
 	}
 ]
-
+*/
 
 
 // creates an object type - a schema that graphql uses
@@ -85,7 +87,13 @@ const RootQuery = new GraphQLObjectType({
 
 					// graphQL will accept any kind of raw data type (sql, json, etc)
 					// and convert it here into GQL for us to use within the GQL runtime
-					return _.find(users, {id: args.id })
+
+					// returns our json data returned from the axios promise
+					return axios.get(`http://localhost:3000/users/${args.id}`)
+
+					// with axios our response's data is attached to the .data property
+					// we need to return this to tell graphQL where the data is
+					.then(response => response.data)
 			}
 		}
 	}

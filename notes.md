@@ -107,3 +107,5 @@
 ]
 }
 ```
+- navigating to /users will bring up the users json
+- nagivating to users/23 brings up the user with the id of 23
