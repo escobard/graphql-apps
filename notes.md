@@ -115,9 +115,19 @@
 mutation {
 
 	// arguments for addUser type defined within the schema/schema file
+	// arguments not defined will not return data, as usual
 	addUser(firstName: "Tom", age: 26){
 
 		// the argument here returns the properties of the mutation
+		id
+		firstName
+		age
+	}
+}
+
+mutation {
+		// due to the patch request type, this mutation ONLY updates the specified fields, but requires the ID
+	editUser(id:"40", firstName: "TEST"){
 		id
 		firstName
 		age

@@ -168,20 +168,38 @@ const mutation = new GraphQLObjectType({
 			},
 			// deconstructs the second argument
 			resolve(parentValue, { firstName, age }) {
-				return axios
-					.post("http://localhost:3000/users", { firstName, age })
-					.then(resolve => resolve.data);
+				return (
+					axios
+						// first argument is the URL for the post request, second argument is the properties we are sending with the post request
+						.post("http://localhost:3000/users", { firstName, age })
+						.then(resolve => resolve.data)
+				);
 			}
 		},
 		deleteUser: {
 			type: UserType,
 			args: {
-				id: { type: GraphQLString }
+				id: { type: new GraphQLNonNull(GraphQLString) }
 			},
 			// deconstructs the second argument
 			resolve(parentValue, { id }) {
 				return axios
 					.delete(`http://localhost:3000/users/${id}`)
+					.then(resolve => resolve.data);
+			}
+		},
+		editUser: {
+			type: UserType,
+			args: {
+				id: { type: new GraphQLNonNull(GraphQLString) },
+				firstName: { type: GraphQLString },
+				age: { type: GraphQLInt },
+				companyId: { type: GraphQLInt }
+			},
+			// deconstructs the second argument
+			resolve(parentValue, args) {
+				return axios
+					.patch(`http://localhost:3000/users/${args.id}`, args)
 					.then(resolve => resolve.data);
 			}
 		}
