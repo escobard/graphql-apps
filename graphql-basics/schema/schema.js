@@ -24,6 +24,8 @@ const users = [
 ]
 */
 
+// an expanded explanation on how ALL of this works which is super helpful understanding
+// GQL here: https://www.udemy.com/graphql-with-react-course/learn/v4/t/lecture/6523072
 const CompanyType = new GraphQLObjectType({
 	name: "Company",
 	fields: {
@@ -38,14 +40,29 @@ const UserType = new GraphQLObjectType({
 	// sets the name of the object type
 	name: "User",
 
-	// this sets the properties that the object type has - the keys of fields aka fields.key
+	// this sets the properties that    the object type has - the keys of fields aka fields.key
 	// is the property we want our User schema to have
 	fields: {
 		// very similar to mongoose, we have to declare the type of each of the schema fields
 		// for graphQL to recognize
 		id: { type: GraphQLString },
 		firstName: { type: GraphQLString },
-		age: { type: GraphQLInt }
+		age: { type: GraphQLInt },
+
+		// relational fields are treated mostly like any other field
+		// the field property is named differently than our actual JSON server data, so it needs a resolver
+		company: {
+			type: CompanyType,
+			// the resolve function can be used for asynchronous requests almost anywhere within the GraphQL runtime
+			resolve(parentValue, args) {
+				// this is how you resolve data types in the database that don't match the graphQL
+				// schema for any given type - can be easily avoided by matching property names exactly
+				// but I will most likely run into this in the future so its great practice
+				return axios
+					.get(`http://localhost:3000/companies/${parentValue.companyId}`)
+					.then(response => response.data);
+			}
+		}
 	}
 });
 
@@ -71,7 +88,8 @@ const RootQuery = new GraphQLObjectType({
 			// defines the resolve callback function, which is the method that ACTUALLY goes inside the database
 			// and returns the properties we are looking for
 			resolve(
-				// this argument is apparently never really used
+				// this argument is apparently never really used but it returns the value of the parent object
+				// in this case, our user with a specific id
 				parentValue,
 				// calls whatever arguments were passed into the query
 				// (set above in RootQueryType.fields.user.args)
@@ -93,6 +111,17 @@ const RootQuery = new GraphQLObjectType({
 						// we need to return this to tell graphQL where the data is
 						.then(response => response.data)
 				);
+			}
+		},
+		company: {
+			type: CompanyType,
+			args: {
+				id: { type: GraphQLString }
+			},
+			resolve(parentValue, args) {
+				return axios
+					.get(`http://localhost:3000/companies/${args.id}`)
+					.then(response => response.data);
 			}
 		}
 	}
