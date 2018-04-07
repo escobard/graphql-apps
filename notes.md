@@ -19,9 +19,10 @@
 * GraphQL queries look like this: `query{ //looks for user with the id of 23 user(id:"23"){ // looks for the all the friends for that user friends{ // fetches the companies for all the friends of the user company{ // fetches the name of that company name } } } }`
 * Think of a query as an entry point into the data application
 * Query expanded:
+* we can name queries whatever we want, for example - naming queries is optional and is only utilized to identify on the front end
 
       	```
-      	{
+      	query findSchema{
       		schema(argument: property) {
       			schema,
       			properties,
@@ -47,6 +48,65 @@
       		}
       	}
       	```
+
+* multiple argumental queries return different objects, depending on the query argument
+* multiple argumental queries can be written like so:
+
+```
+	{
+		// this sets the key of the resolution data to apple instead of the standard company
+		apple: company(id: "1"){
+			id
+			name
+			description
+		}
+		google: company(id: "2"){
+			id
+			name
+			description
+		}
+	}
+```
+
+* this returns the following:
+
+```
+{
+  "data": {
+    "apple": {
+      "id": "1",
+      "name": "Apple",
+      "description": "iphone"
+    },
+    "google": {
+      "id": "2",
+      "name": "Google",
+      "description": "search"
+    }
+  }
+}
+```
+
+* fragment queries allow you to grab properties from multiple types without repeating the properties:
+
+```
+	{
+		apple: company(id: "1"){
+			...companyDetails
+		}
+		google: company(id: "2"){
+			...companyDetails
+		}
+	}
+
+	// first argument is the name of the fragment
+	// second is the name of the type
+	fragment companyDetails on Company {
+		id
+		name
+		description
+	}
+```
 
 * queries LOOK like javascript but are NOT javascript
 * We can also remove any DEFINED properties of the user schema within the QUERY - this will only return the specified properties of the SCHEMA within the QUERY RESULT
