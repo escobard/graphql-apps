@@ -47,3 +47,9 @@
 
 - made as an IDE by the GraphQL team to visualize graphQL queries and data fetching.
 - https://workspace.ibm.com/graphql
+- Has the following features:
+	- history: shows query history for runtime
+	- input: where we type the query
+	- console: where we see the results of the query
+	- documentation: where we see the current root / query types - SUPER USEFUL
+		- this area allows to view the properties of the queries including queries, and object types

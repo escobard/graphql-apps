@@ -1,7 +1,8 @@
 // this file contains all of the knowledge necessary
 // for GraphQL to know EXACTLY what your data looks like
 
-const graphql = require('graphql');
+const graphql = require('graphql'),
+_ = require('lodash')
 
 // this grabs the properties that we need to define our schema from the graphql library
 const {
@@ -15,7 +16,7 @@ const {
 // we'll be using lodash as a helper library to go through the data to save time
 const users = [
 	{
-		id: '23',
+		id: "23",
 		firstName: 'Bill',
 		age: '20'
 	}, 
@@ -78,11 +79,7 @@ const RootQuery = new GraphQLObjectType({
 
 					// this finds a user with a given user id from the users[array] we just created
 					// this is using the lodash library
-					return 
-
-						// runs a forEach statement for the object in the first argument (users) with 
-						// the argument's id and returns the object as the query result
-						_.find(users, {id: args.id })
+					return _.find(users, {id: args.id })
 			}
 		}
 	}
