@@ -2,7 +2,7 @@
 
 The purpose of this repository is to create some boilerplate applications that can be expanded in the future for client and personal projects.
 
-In addition, this repository contains all of my own programming files, notes, applications, and libraries for the [GraphQL with React: The Complete Developers Guide](https://www.udemy.com/graphql-with-react-course/) course with [Udemy](https://www.udemy.com). 
+In addition, this repository contains all of my own programming files, notes, applications, and libraries for the [GraphQL with React: The Complete Developers Guide](https://www.udemy.com/graphql-with-react-course/) course with [Udemy](https://www.udemy.com).
 
 ## Demo
 
@@ -22,21 +22,15 @@ Usage instructions available within each application folder.
 
 ## Notes on graphql:
 
-- [Notes](https://github.com/escobard/graphql-apps/wiki/Notes)
+* [Notes](https://github.com/escobard/graphql-apps/wiki/Notes)
 
 ## Libraries & tools
 
 More usage instructions on this application coming in the future.
 
-- (metamask.io)[https://metamask.io/]
-- (remix)[https://remix.ethereum.org]
-- (rinkby fawcet)(https://faucet.rinkeby.io/)
-- web3.js
+[graphql](http://graphql.org) [express](https://www.express.com/) [node](https://nodejs.org/en/)
 
 ## Known bugs:
-
-- Installing the web3 version with npm install does not always install the correct package and may cause errors.
-	- To fix this, run the following command: `npm install web3@1.0.0-beta.26`
 
 ## Applications breakdown
 
