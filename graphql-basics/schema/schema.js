@@ -9,7 +9,8 @@ const graphql = require("graphql"),
 		GraphQLString,
 		GraphQLInt,
 		GraphQLSchema,
-		GraphQLList
+		GraphQLList,
+		GraphQLNonNull
 	} = graphql;
 
 // for this project we will use static data
@@ -156,16 +157,40 @@ const mutation = new GraphQLObjectType({
 		addUser: {
 			type: UserType,
 			args: {
-				firstName: { type: graphQLString },
-				age: { type: GraphQLInt },
+				firstName: {
+					// the method GraphQLNonNull REQUIRES this argument within the mutation query
+					// this is a slight level of validation, which makes it so that the user
+					// cannot leave this field empty
+					type: new GraphQLNonNull(GraphQLString)
+				},
+				age: { type: new GraphQLNonNull(GraphQLInt) },
 				companyId: { type: GraphQLString }
 			},
-			resolve() {}
+			// deconstructs the second argument
+			resolve(parentValue, { firstName, age }) {
+				return axios
+					.post("http://localhost:3000/users", { firstName, age })
+					.then(resolve => resolve.data);
+			}
+		},
+		deleteUser: {
+			type: UserType,
+			args: {
+				id: { type: GraphQLString }
+			},
+			// deconstructs the second argument
+			resolve(parentValue, { id }) {
+				return axios
+					.delete(`http://localhost:3000/users/${id}`)
+					.then(resolve => resolve.data);
+			}
 		}
 	}
 });
 
 // this effectively creates the schema, passing it the RootQuery created above
 module.exports = new GraphQLSchema({
-	query: RootQuery
+	query: RootQuery,
+	// shortened from mutation:mutation
+	mutation
 });

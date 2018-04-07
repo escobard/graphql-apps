@@ -108,6 +108,23 @@
 	}
 ```
 
+* mutations are callbacks that allow us to manipulate the data within our GQL runtime.
+* mutation syntax looks like this:
+
+```
+mutation {
+
+	// arguments for addUser type defined within the schema/schema file
+	addUser(firstName: "Tom", age: 26){
+
+		// the argument here returns the properties of the mutation
+		id
+		firstName
+		age
+	}
+}
+```
+
 * queries LOOK like javascript but are NOT javascript
 * We can also remove any DEFINED properties of the user schema within the QUERY - this will only return the specified properties of the SCHEMA within the QUERY RESULT
 * All `types` within GraphQL (even imported ones from the library) are essentially objects created with the GraphQLObjectType method - super neat.
