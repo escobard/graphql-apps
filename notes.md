@@ -41,6 +41,7 @@
 		}
 	}
 	```
+- Think of a query as an entry point into the data application
 
 ### GraphiQL
 
