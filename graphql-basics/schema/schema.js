@@ -11,7 +11,6 @@ axios = require('axios'),
 	GraphQLSchema
 } = graphql;
 
-
 // for this project we will use static data
 // we'll be using lodash as a helper library to go through the data to save time
 // deleted to use json server data instead
@@ -29,7 +28,6 @@ const users = [
 	}
 ]
 */
-
 
 // creates an object type - a schema that graphql uses
 const UserType = new GraphQLObjectType({
