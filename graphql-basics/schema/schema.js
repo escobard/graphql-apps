@@ -148,6 +148,23 @@ const RootQuery = new GraphQLObjectType({
 	}
 });
 
+// here we define mutations for our data, more on that here: http://graphql.org/learn/queries/
+// essentially mutations are ways to manipulate fetched data within the GQL runtime
+const mutation = new GraphQLObjectType({
+	name: "Mutation",
+	fields: {
+		addUser: {
+			type: UserType,
+			args: {
+				firstName: { type: graphQLString },
+				age: { type: GraphQLInt },
+				companyId: { type: GraphQLString }
+			},
+			resolve() {}
+		}
+	}
+});
+
 // this effectively creates the schema, passing it the RootQuery created above
 module.exports = new GraphQLSchema({
 	query: RootQuery
