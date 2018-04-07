@@ -10,7 +10,7 @@ app.use('/graphql',
 	// this tells express to handle this particular request with the graphQL library
 	expressGraphQL({
 
-		// this tells the application to displaya the graphiql IDE when this route is reached
+		// this tells the application to display the graphiql IDE when this route is reached
 		graphiql: true
 	}))
 
