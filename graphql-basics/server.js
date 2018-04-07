@@ -16,6 +16,7 @@ app.use('/graphql',
 		schema,
 		// this tells the application to display the graphiql IDE when this route is reached
 		graphiql: true
+		
 	}))
 
 app.listen(4000, () =>{
