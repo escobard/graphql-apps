@@ -45,8 +45,8 @@ const CompanyType = new GraphQLObjectType({
 
 		// this allows us to query for users with the CompanyType as the parentValue, much like was done int he users type below
 		users: {
-			// this type expects a LIST of OBJECTS to be returned
-			// this throws an error since the UserType has not been defined yet
+			// this type expects an ARRAY of OBJECTS to be returned
+			// this throws an error since the UserType has not been defined yet - solved on line 41 by calling a function on the fields property
 			type: new GraphQLList(UserType),
 			resolve(parentValue, args) {
 				return axios
@@ -76,6 +76,7 @@ const UserType = new GraphQLObjectType({
 		company: {
 			type: CompanyType,
 			// the resolve function can be used for asynchronous requests almost anywhere within the GraphQL runtime
+			// the inline resolve function is the incredibly helpful for data mapping with express-graphql
 			resolve(parentValue, args) {
 				// this is how you resolve data types in the database that don't match the graphQL
 				// schema for any given type - can be easily avoided by matching property names exactly

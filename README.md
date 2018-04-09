@@ -28,7 +28,9 @@ Usage instructions available within each application folder.
 
 More usage instructions on this application coming in the future.
 
-[graphql](http://graphql.org) [express](https://www.express.com/) [node](https://nodejs.org/en/)
+* [graphql](http://graphql.org)
+* [express](https://www.express.com/)
+* [node](https://nodejs.org/en/)
 
 ## Known bugs:
 

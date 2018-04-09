@@ -170,3 +170,27 @@ mutation {
 
 * navigating to /users will bring up the users json
 * nagivating to users/23 brings up the user with the id of 23
+
+## v0.3 - front end
+
+### Client libraries w/ graphQL
+
+- lokka:
+	+ simple basic queries and mutations, some caching.
+- apollo client:
+	+ produced by the same guys as meteor.js
+	+ good balance between features and complexity
+	+ full stack:
+		+ uses its own server on the back end (replacing express)
+		+ and on the front end.
+- relay:
+	+ managed by facebook, amazing for performance.
+	+ incredibly complex to use, will not be used in the course
+
+
+### GraphQL vs Apollo server
+
+- we are using a graphql-express server with our api
+- the apollo server is going through constant upgrades and changes, and is slightly unstable
+- graphql-express is a more syntaxtically stable library than the apollo server
+- we will be using the apollo client for our next application but not the apollo server
