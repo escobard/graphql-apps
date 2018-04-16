@@ -6,7 +6,7 @@ class SongList extends Component{
 	renderSongs(){
 		return this.props.data.songs.map((song, index)=>{
 			return(
-					<li key={index}>
+					<li key={index} className="collection-item">
 						{song.title}
 					</li>
 				)
