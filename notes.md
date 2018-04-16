@@ -194,3 +194,27 @@ mutation {
 - the apollo server is going through constant upgrades and changes, and is slightly unstable
 - graphql-express is a more syntaxtically stable library than the apollo server
 - we will be using the apollo client for our next application but not the apollo server
+
+
+## v0.4 - apollo front end
+
+- query variables:
+	+ used to bind data that can be passed to GQL
+- writing mutations:
+```
+	// we define query variables with the following syntax:
+	{
+		// define just the name of the variable without the $ which is unecessary
+		"title": "Value of the Title"
+	}
+
+	// we name the mutation so we can utilize it similarily to a JS function within GQL
+	// the $title syntax here is a variable that we can refer back to 
+	mutation AddSong($title: String){
+		// this passes the $title variable as the title of the new song
+		addSong(title: $title){
+			id
+			title
+		}
+	}
+```

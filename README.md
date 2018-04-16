@@ -29,6 +29,7 @@ Usage instructions available within each application folder.
 More usage instructions on this application coming in the future.
 
 * [graphql](http://graphql.org)
+* [apollo](https://www.apollographql.com/)
 * [express](https://www.express.com/)
 * [node](https://nodejs.org/en/)
 
