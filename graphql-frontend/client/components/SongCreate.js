@@ -10,6 +10,16 @@ class SongCreate extends Component{
 
 	onSubmit(event){
 		event.preventDefault()
+		console.log(this.props)
+		console.log(this.state)
+		// this expects an object with the variables that need to be passed into the mutation
+		this.props.mutate({
+			variables:{
+
+				// sets the variable values to the mutation, in this case the defined $title: String
+				title: this.state.title
+			}
+		})
 	}
 
 	render(){
@@ -26,12 +36,12 @@ class SongCreate extends Component{
 }
 
 // it may be worth considering to refactor gql queries / mutations into a separate file
+// adding this to the graphQL higher order component adds the mutation to this.props.varName
 const mutation = gql`
-	mutation{
-	  addSong(title: "Cool song"){
-	    id
-	   	title
-	  }
+	mutation AddSong($title: String){
+		addSong(title: $title){
+			title
+		}
 	}
 `
 
