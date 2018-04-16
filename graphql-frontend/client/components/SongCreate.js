@@ -10,7 +10,6 @@ class SongCreate extends Component{
 
 	onSubmit(event){
 		event.preventDefault()
-
 	}
 
 	render(){
