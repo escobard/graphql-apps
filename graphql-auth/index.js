@@ -1,4 +1,4 @@
-const app = require('graphql-auth/server/server');
+const app = require('./server/server');
 
 app.listen(4000, () => {
   console.log('Listening');

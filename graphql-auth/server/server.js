@@ -1,12 +1,12 @@
 const express = require('express');
-const models = require('graphql-auth/server/models');
+const models = require('./models');
 const expressGraphQL = require('express-graphql');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-const passportConfig = require('graphql-auth/server/services/auth');
+const passportConfig = require('./services/auth');
 const MongoStore = require('connect-mongo')(session);
-const schema = require('graphql-auth/server/schema/schema');
+const schema = require('./schema/schema');
 
 // Create a new Express application
 const app = express();
@@ -57,7 +57,7 @@ app.use('/graphql', expressGraphQL({
 // a single bundle.js output of all of our client side Javascript
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpack = require('webpack');
-const webpackConfig = require('graphql-auth/webpack.config.js');
+const webpackConfig = require('../webpack.config.js');
 app.use(webpackMiddleware(webpack(webpackConfig)));
 
 module.exports = app;

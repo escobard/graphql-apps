@@ -1,1 +1,1 @@
-require('graphql-auth/server/models/user');
+require('./user');
