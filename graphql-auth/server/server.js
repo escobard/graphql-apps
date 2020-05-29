@@ -12,7 +12,7 @@ const schema = require('graphql-auth/server/schema/schema');
 const app = express();
 
 // Replace with your mongoLab URI
-const MONGO_URI = '';
+const MONGO_URI = 'mongodb://admin:admin1234@ds031895.mlab.com:31895/graphql-auth';
 
 // Mongoose's built in promise library is deprecated, replace it with ES2015 Promise
 mongoose.Promise = global.Promise;
