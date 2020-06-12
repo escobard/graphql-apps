@@ -44,7 +44,7 @@ class Header extends Component {
     console.log(this.props.data);
     return (
       <nav>
-        <div className="nav-wrapper">
+        <div className="nav-wrapper container">
           <Link to="/" className="brand-logo left">
             Home
           </Link>
