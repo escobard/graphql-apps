@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import { Link } from "react-router";
-import query from "../queries/CurrentUser";
-import mutation from "../mutations/logout";
+import CurrentUserMutation from "../queries/CurrentUser";
+import LogoutMutation from "../mutations/logout";
 
 class Header extends Component {
   onLogoutClick() {
     this.props.mutate({
-      // https://www.apollographql.com/docs/react/data/mutations/
-      // refetches gql CurrentUser query after logout mutation
-      refetchQueries: [{ query }]
+      // https://www.apollographql.com/docs/react/data/LogoutMutations/
+      // refetches gql CurrentUser CurrentUserMutation after logout LogoutMutation
+      refetchQueries: [{ query: CurrentUserMutation }]
     })
   }
 
@@ -56,4 +56,4 @@ class Header extends Component {
 }
 
 // to attach multiple gql calls to a component's props
-export default graphql(mutation)(graphql(query)(Header));
+export default graphql(LogoutMutation)(graphql(CurrentUserMutation)(Header));
