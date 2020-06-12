@@ -7,6 +7,7 @@ import { ApolloProvider } from "react-apollo";
 
 import App from "./App";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 // apollo assumes the gql client on the server is listening to /graphql, but using a networkInterface removes the
 // implicit behavior, so the uri property is required
@@ -34,7 +35,8 @@ const Root = () => {
     <ApolloProvider client={client}>
       <Router history={hashHistory}>
         <Route path="/" component={App}>
-           <Route path="login" component={Login} />
+          <Route path="login" component={Login} />
+          <Route path="signup" component={Signup} />
         </Route>
       </Router>
     </ApolloProvider>
