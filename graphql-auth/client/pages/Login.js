@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
+import { hashHistory } from "react-router";
 
 import AuthForm from "../components/forms/AuthForm";
 import CurrentUserMutation from "../queries/CurrentUser";
@@ -11,9 +12,16 @@ class Login extends Component {
     this.state = { errors: [] };
   }
 
+  componentWillUpdate(nextProps) {
+    if (!this.props.data.user && nextProps.data.user)
+      hashHistory.push("/dashboard");
+  }
+
   onSubmit({ email, password }) {
     this.props
       .mutate({
+        // .mutate does not wait for the refetchQueries promise to resolve, special consideration is
+        // necessary to workaround this gotcha w/ apollo
         refetchQueries: [{ query: CurrentUserMutation }],
         // https://www.apollographql.com/docs/react/data/mutations/#executing-a-mutation
         // this sets query variables for the mutation
@@ -38,4 +46,4 @@ class Login extends Component {
   }
 }
 
-export default graphql(LoginMutation)(Login);
+export default graphql(CurrentUserMutation)(graphql(LoginMutation)(Login));
